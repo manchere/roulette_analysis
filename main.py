@@ -17,3 +17,4 @@ if __name__ == '__main__':
     main = Main(sys.argv)
     main.view.show()
     sys.exit(main.exec())
+

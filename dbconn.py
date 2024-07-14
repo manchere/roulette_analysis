@@ -16,7 +16,7 @@ class DbConnection:
                                 password=self.password,
                                 port=5432)
         conn.cursor()
-        print(conn.status)
+        # print(conn.status)
 
     @property
     def db(self):

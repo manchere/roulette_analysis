@@ -1,15 +1,15 @@
-from statistics import mode
+import numpy as np
+from collections import Counter, Iterable
+from statistics import mode, mean
 
 
-def recurrent(value, lists, n):
-    return lists[:n].count(value)
+def get_most_frequent(lst):
+    return np.bincount(lst).argmax()
 
 
-def number_neighbors(number, range_neighbours):
-    pass
+def get_n_most_frequent(lst, n):
+    return Counter(lst).most_common(n)
 
 
-
-
-
-
+def get_frequency_of(value, lst, start=0, end=None):
+    return lst[start:end].count(value)
