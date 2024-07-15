@@ -1,3 +1,4 @@
+import os
 import sys
 import config as conf
 from qtpy import QtWidgets
@@ -16,5 +17,8 @@ class Main(QtWidgets.QApplication):
 if __name__ == '__main__':
     main = Main(sys.argv)
     main.view.show()
+    with open(os.path.dirname(__file__) + "/style.css", "r") as f:
+        _style = f.read()
+        main.setStyleSheet(_style)
     sys.exit(main.exec())
 

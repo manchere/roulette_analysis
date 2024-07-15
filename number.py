@@ -6,28 +6,33 @@ class Number:
     def __init__(self, number):
         with open('color_scheme.json', 'r') as f:
             color_data = json.load(f)
-        self.number = number
-        self.color = color_data[str(number)]
-        self.rank = None
+        self._number = number
+        self._color = color_data[str(number)]
+        self._rank = None
 
     @property
     def number(self):
-        return self.number
+        return self._number
 
     @number.setter
     def number(self, value):
-        self.number = value
+        self._number = value
 
     @property
     def color(self):
-        return self.color
+        return self._color
 
     @property
     def rank(self):
-        return self.rank
+        return self._rank
 
     @rank.setter
     def rank(self, value):
-        self.rank = value
+        self._rank = value
 
 
+class Game:
+    pass
+
+class Bet:
+    pass
