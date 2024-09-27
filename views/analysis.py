@@ -32,3 +32,4 @@ def get_diff_of_arr(lst1, lst2):
     return np.setdiff1d(list(map(lambda x: x, lst1)),
                         list(map(lambda y: y, lst2)))
 
+

@@ -18,11 +18,12 @@ class View(QtWidgets.QMainWindow):
         self.setCentralWidget(self.window)
         self.txt_number = QtWidgets.QLineEdit()
         self.lst_output = QtWidgets.QListWidget()
+        self.collapsible = CollapsibleArea('Numbers Data', self.lst_output)
         self.temp = TemperatureLayout()
 
         self.layout.addLayout(self.temp)
         self.layout.addWidget(self.txt_number)
-        self.layout.addWidget(self.lst_output)
+        self.layout.addWidget(self.collapsible)
 
         self.lst_output.setAlternatingRowColors(True)
         self.lst_output.setDragDropMode(
@@ -40,12 +41,16 @@ class View(QtWidgets.QMainWindow):
         )
         self.temp.fill_temperature_bar(self.temp.hot_labels, most_freq, self.get_QlistCount())
         self.temp.fill_temperature_bar(self.temp.cold_labels, least_freq, self.get_QlistCount())
+        self.txt_number.clear()
 
     def get_QListItems(self):
         return [self.lst_output.item(x).text() for x in range(self.lst_output.count())]
 
     def get_QlistCount(self):
         return len(self.get_QListItems())
+
+    def set_size_policies(self):        # Set size policy to fixed
+        self.layout.setSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
 
 class TemperatureLayout(QtWidgets.QHBoxLayout):
@@ -90,5 +95,26 @@ class TemperatureLayout(QtWidgets.QHBoxLayout):
         num.rank = rank
 
 
+class CollapsibleArea(QtWidgets.QWidget):
+    def __init__(self, title="", widget=None,  *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.widget = widget
+        self.content_Layout = QtWidgets.QVBoxLayout()
+        self.setLayout(self.content_Layout)
+
+        self.toggle_button = QtWidgets.QPushButton(title)
+        self.toggle_button.setCheckable(True)
+        self.toggle_button.setChecked(True)
+        self.toggle_button.clicked.connect(self.toggle)
+
+        self.content_Layout.addWidget(self.toggle_button)
+        self.content_Layout.addWidget(self.widget)
+
+    def toggle(self, widget):
+        if self.toggle_button.isChecked():
+            self.widget.show()
+        else:
+            self.widget.hide()
 
 
